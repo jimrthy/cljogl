@@ -15,6 +15,15 @@
 
 (defn render [gl2 width height]
   (.glClear gl2 GL/GL_COLOR_BUFFER_BIT)
-  
-  (throw (RuntimeException. "Start here!"))
-  )
+
+  ;; Draw a triangle filling the window
+  (doto gl2
+    (.glLoadIdentity)
+    (.glBegin GL/GL_TRIANGLES)
+    (.glColor3f 1 0 0)
+    (.glVertex2f 0 0)
+    (.glColor3f 0 1 0)
+    (.glVertex2f width 0)
+    (.glColor3f 0 0 1)
+    (.glVertex2f (/ 2 width) height)
+    (.glEnd)))
