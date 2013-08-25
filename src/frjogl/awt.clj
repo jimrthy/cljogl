@@ -1,9 +1,9 @@
 (ns frjogl.awt
-  (:require [frjogl.base])
+  (:require [frjogl.base :as base])
   (:import [javax.media.opengl GLAutoDrawable GLEventListener GLProfile
             GLCapabilities]
-           [javax.media.opengl.awt.GLCanvas]
-           [java.awt.Frame]
+           javax.media.opengl.awt.GLCanvas
+           java.awt.Frame
            [java.awt.event WindowAdapter WindowEvent])
   (:gen-class))
 
@@ -14,23 +14,22 @@
 (defn build-gl-listener []
   (proxy [GLEventListener] []
     (reshape [gl-auto-drawable x y w h]
-      (base/setup (-> gl-auto-drawable getGL getGL2)
-                  w h))
+      (base/setup (.getGL2 (.getGL gl-auto-drawable)) w h))
     
-    (init)
-    (dispose)
+    (init [_])
+    (dispose [_])
 
     (display [gl-auto-drawable]
-      (base/render (-> gl-auto-drawable getGL getGL2)
+      (base/render (.getGL2 (.getGL gl-auto-drawable))
                    (.getWidth gl-auto-drawable)
                    (.getHeight gl-auto-drawable)))))
 
 (defn build-gl-canvas []
-  (let [profile (GLprofile/getDefault)
+  (let [profile (GLProfile/getDefault)
         caps (GLCapabilities. profile)
         canvas (GLCanvas. caps)
         listener (build-gl-listener)]
-    (.addGLEventListener canvas listener)
+    (.addGLEventListener canvas (build-gl-listener))
     canvas))
 
 (defn build-frame [gl-canvas]

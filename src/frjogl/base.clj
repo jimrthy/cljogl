@@ -1,14 +1,36 @@
 (ns frjogl.base
   (:import [javax.media.opengl GL GL2]
-           [javax.media.opengl.glu.GLU]))
+           javax.media.opengl.glu.GLU)
+  ;; Debugging only
+  (:require [clojure.reflect :as r]
+            [clojure.pprint :as pp]))
+
+(defn show-members
+  "Realistically, this is a debug-only method that belongs
+in pretty much everyone's standard repertoire."
+  [o]
+  (pp/print-table
+   (sort-by :name
+            (filter :exception-types
+                    (:members (r/reflect o))))))
 
 (defn setup [gl2 width height]
-  (.glMatrixModel gl2 GL2/GL_PROJECTION)
+  (println (format "Dealing with '%s' (a %s with methods:\n)"
+                   gl2 (class gl2)))
+  (comment (show-members gl2))
+
+  (.glMatrixMode gl2 GL2/GL_PROJECTION)
   (.glLoadIdentity gl2)
 
-  (.gluOrtho2D (GLU.) 0.0 width 0.0 height)
+  ;(throw (RuntimeException. "Just to stop things"))
+
+  (comment) (.gluOrtho2D (GLU.) 0.0 (double width) 0.0 (double height))
+  (comment
+    (let [glu (GLU.)]
+      (show-members glu)
+      (.gluOrtho2D glu 0.0 (double width) 0.0 (double height))))
   
-  (.glMatrixModel gl2 GL2/GL_MODELVIEW)
+  (.glMatrixMode gl2 GL2/GL_MODELVIEW)
   (.glLoadIdentity gl2)
 
   (.glViewport gl2 0 0 width height))
