@@ -48,16 +48,12 @@
                               (windowClosing [event]
                                              (doto f
                                                (.remove gl-canvas)
-                                               (.dispose))
-                                             ;; The original calls
-                                             ;; (System/exit 0) here.
-                                             ;; I'm pretty sure I don't
-                                             ;; want to do that.
-                                             ))))))
+                                               (.dispose))))))))
 
 (defn run []
   (let [canvas (build-gl-canvas)
         frame (build-frame canvas)]
     (doto frame
       (.setSize 640 480)
-      (.setVisible true))))
+      (.setVisible true))
+    frame))
