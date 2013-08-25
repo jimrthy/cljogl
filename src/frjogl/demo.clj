@@ -1,5 +1,6 @@
 (ns frjogl.demo
-  (:require [seesaw.core :refer :all])
+  (:require [seesaw.core :refer :all]
+            [frjogl.awt :as awt])
   (:gen-class))
 
 ;;;; Show off (or whatever) the available demos.
@@ -11,9 +12,16 @@
   "Create a window/dialog/form that knows how to kick off the
 actual demos."
   []
-  (let [lbl (label "Have to start somewhere")
+  (let [b (button :text "Coolness!")
         f (frame :title "JOGL from Clojure"
-                 :content lbl)]
+                 :content b)]
+    ;; This next function's actually a nightmare:
+    ;; There isn't any real way to actually close the resulting window,
+    ;; short of killing the JVM.
+    ;; At least, it would be if it actually worked.
+    ;; Still: baby steps.
+    (listen b :action (fn [_] (comment (Thread. awt/run))
+                        (alert nil "Click")))
     (-> f pack! show!)
     f))
 
