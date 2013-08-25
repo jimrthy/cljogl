@@ -11,6 +11,12 @@
 ;;; Originally by Wade Walker
 ;;; Translated into clojure by James Gatannah
 
+;;; This file may well have all sorts of licensing issues that keep
+;;; me from doing anything interesting with this project.
+;;; TODO: Check with JOGL and find out what sort of license
+;;; applies to their tutorial. If any. Whatever license applies
+;;; to the actual library is also probably extremely relevant.
+
 (defn build-gl-listener []
   (proxy [GLEventListener] []
     (reshape [gl-auto-drawable x y w h]
@@ -55,5 +61,4 @@
         frame (build-frame canvas)]
     (doto frame
       (.setSize 640 480)
-      (.setVisible true))
-    frame))
+      (.setVisible true))))
