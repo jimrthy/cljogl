@@ -1,7 +1,8 @@
 (ns frjogl.base
   (:import [javax.media.opengl GL GL2]
            javax.media.opengl.glu.GLU)
-  ;; Debugging only
+  ;; Only for show-members...which definitely does
+  ;; not belong here.
   (:require [clojure.reflect :as r]
             [clojure.pprint :as pp]))
 
@@ -15,20 +16,10 @@ in pretty much everyone's standard repertoire."
                     (:members (r/reflect o))))))
 
 (defn setup [gl2 width height]
-  (println (format "Dealing with '%s' (a %s with methods:\n)"
-                   gl2 (class gl2)))
-  (comment (show-members gl2))
-
   (.glMatrixMode gl2 GL2/GL_PROJECTION)
   (.glLoadIdentity gl2)
 
-  ;(throw (RuntimeException. "Just to stop things"))
-
-  (comment) (.gluOrtho2D (GLU.) 0.0 (double width) 0.0 (double height))
-  (comment
-    (let [glu (GLU.)]
-      (show-members glu)
-      (.gluOrtho2D glu 0.0 (double width) 0.0 (double height))))
+  (.gluOrtho2D (GLU.) 0.0 (double width) 0.0 (double height))
   
   (.glMatrixMode gl2 GL2/GL_MODELVIEW)
   (.glLoadIdentity gl2)

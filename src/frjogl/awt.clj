@@ -14,13 +14,21 @@
 (defn build-gl-listener []
   (proxy [GLEventListener] []
     (reshape [gl-auto-drawable x y w h]
-      (base/setup (.getGL2 (.getGL gl-auto-drawable)) w h))
+      ;; Note that this only gets called the first time through.
+      ;; Not exactly what I expected.
+      (println "Reshape!")
+      (base/setup (-> gl-auto-drawable
+                      (.getGL) 
+                      (.getGL2))
+                  w h))
     
     (init [_])
     (dispose [_])
 
     (display [gl-auto-drawable]
-      (base/render (.getGL2 (.getGL gl-auto-drawable))
+      (base/render (-> gl-auto-drawable
+                       (.getGL)
+                       (.getGL2))
                    (.getWidth gl-auto-drawable)
                    (.getHeight gl-auto-drawable)))))
 
