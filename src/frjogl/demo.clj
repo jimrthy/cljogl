@@ -20,8 +20,10 @@ actual demos."
     ;; short of killing the JVM.
     ;; At least, it would be if it actually worked.
     ;; Still: baby steps.
-    (listen b :action (fn [_] (comment (Thread. awt/run))
-                        (alert nil "Click")))
+    (listen b :action (fn [_] (comment) 
+                        (alert "Pre" "Starting")
+                        (Thread. awt/run)
+                        (alert "Post" "Started")))
     (-> f pack! show!)
     f))
 
