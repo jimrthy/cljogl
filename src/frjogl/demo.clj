@@ -1,6 +1,6 @@
-(ns frjogl.demo
+(ns cljogl.demo
   (:require [seesaw.core :refer :all]
-            [frjogl.awt :as awt])
+            [cljogl.awt :as awt])
   (:gen-class))
 
 ;;;; Show off (or whatever) the available demos.
@@ -22,7 +22,8 @@ actual demos."
     ;; Still: baby steps.
     (listen b :action (fn [_] (comment) 
                         (alert "Pre" "Starting")
-                        (Thread. awt/run)
+                        (_(Thread. awt/run))
+			(awt/run)
                         (alert "Post" "Started")))
     (-> f pack! show!)
     f))

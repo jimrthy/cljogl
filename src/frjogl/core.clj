@@ -1,5 +1,5 @@
-(ns frjogl.core
-  (:require [frjogl.awt :as awt])
+(ns cljogl.core
+  (:require [cljogl.awt :as awt])
   (:gen-class))
 
 (defn -main

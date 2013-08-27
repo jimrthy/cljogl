@@ -1,5 +1,5 @@
-(ns frjogl.awt
-  (:require [frjogl.base :as base])
+(ns cljogl.awt
+  (:require [cljogl.base :as base])
   (:import [javax.media.opengl GLAutoDrawable GLEventListener GLProfile
             GLCapabilities]
            javax.media.opengl.awt.GLCanvas

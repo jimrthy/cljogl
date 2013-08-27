@@ -1,4 +1,4 @@
-(ns frjogl.base
+(ns cljogl.base
   (:import [javax.media.opengl GL GL2]
            javax.media.opengl.glu.GLU)
   ;; Only for show-members...which definitely does

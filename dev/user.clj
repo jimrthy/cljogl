@@ -5,25 +5,25 @@
             [clojure.repl :refer :all]
             [clojure.test :as test]
             [clojure.tools.namespace.repl :refer (refresh refresh-all)]
-            [frjogl.system :as system]))
+            [cljogl.system :as system]))
 
-(def system nil)
+(def world nil)
 
 (defn init
   "Constructs the next development system"
   []
-  (alter-var-root #'system
+  (alter-var-root #'world
                   (constantly (system/system))))
 
 (defn start
   "Starts the current development system"
   []
-  (alter-var-root #'system system/start))
+  (alter-var-root #'world system/start))
 
 (defn stop
   "Shuts down and destroys the current development system"
   []
-  (alter-var-root #'system
+  (alter-var-root #'world
                   (fn [s]
                     (when s
                       (system/stop s)))))

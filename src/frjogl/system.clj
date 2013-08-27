@@ -1,6 +1,6 @@
-(ns frjogl.system
+(ns cljogl.system
   (:require [seesaw.core :as seesaw]
-            [frjogl.demo :as demo])
+            [cljogl.demo :as demo])
   (:import java.awt.event.WindowEvent)
   (:gen-class))
 

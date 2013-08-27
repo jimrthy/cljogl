@@ -1,4 +1,4 @@
-(defproject frjogl "0.1.0-SNAPSHOT"
+(defproject cljogl "0.1.0-SNAPSHOT"
   :description "Try messing around with JOGL again"
   :url "http://frereth.com/"
   :license {:name "Eclipse Public License"
