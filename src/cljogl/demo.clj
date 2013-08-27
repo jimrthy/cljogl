@@ -21,10 +21,7 @@ actual demos."
     ;; At least, it would be if it actually worked.
     ;; Still: baby steps.
     (listen b :action (fn [_] (comment) 
-                        (alert "Pre" "Starting")
-                        (_(Thread. awt/run))
-			(awt/run)
-                        (alert "Post" "Started")))
+			(awt/run)))
     (-> f pack! show!)
     f))
 
